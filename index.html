@@ -726,6 +726,15 @@
 
           tooltip.style.display = "block";
         });
+        area.addEventListener("onclick", () => {
+          const name = area.dataset.name;
+          const imgSrc = area.dataset.img;
+
+          tooltipImage.src = imgSrc;
+          tooltipName.textContent = name;
+
+          tooltip.style.display = "block";
+        });
 
         area.addEventListener("mousemove", (e) => {
           tooltip.style.left = `${e.pageX + 15}px`;
