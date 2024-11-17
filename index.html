@@ -60,6 +60,24 @@
         margin: 0.5rem 0 0;
         font-size: 1rem;
       }
+      .spinner {
+        width: 30px;
+        height: 30px;
+        border: 4px solid rgba(0, 0, 0, 0.1);
+        border-top: 4px solid #004aad;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin: auto;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
     </style>
   </head>
   <body>
@@ -75,16 +93,22 @@
         class="responsive-image"
         id="group-photo"
       />
-      
+
       <map name="group-map" id="group-map"></map>
     </div>
     <div id="tooltip" class="tooltip">
-      <img src="" alt="Student Image" id="tooltip-image" />
+      <div class="spinner" id="tooltip-spinner"></div>
+      <img
+        src=""
+        alt="Student Image"
+        id="tooltip-image"
+        style="display: none"
+      />
       <h4 id="tooltip-name">Student Name</h4>
     </div>
-<br>
-<br>
-<br>
+    <br />
+    <br />
+    <br />
     <!-- <script>
       const areas = document.querySelectorAll("area");
 
@@ -721,18 +745,44 @@
           const name = area.dataset.name;
           const imgSrc = area.dataset.img;
 
+          // Load the image
           tooltipImage.src = imgSrc;
-          tooltipName.textContent = name;
 
+          // Wait for the image to load
+          tooltipImage.onload = () => {
+            spinner.style.display = "none";
+            tooltipImage.style.display = "block";
+          };
+
+          tooltipImage.onerror = () => {
+            spinner.style.display = "none";
+            tooltipName.textContent = "Image failed to load";
+          };
+
+          // Show the tooltip
           tooltip.style.display = "block";
         });
-        area.addEventListener("onclick", () => {
+
+        area.addEventListener("onclick", (e) => {
+          e.stopPropagation();
           const name = area.dataset.name;
           const imgSrc = area.dataset.img;
 
+          // Load the image
           tooltipImage.src = imgSrc;
-          tooltipName.textContent = name;
 
+          // Wait for the image to load
+          tooltipImage.onload = () => {
+            spinner.style.display = "none";
+            tooltipImage.style.display = "block";
+          };
+
+          tooltipImage.onerror = () => {
+            spinner.style.display = "none";
+            tooltipName.textContent = "Image failed to load";
+          };
+
+          // Show the tooltip
           tooltip.style.display = "block";
         });
 
