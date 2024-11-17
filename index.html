@@ -717,6 +717,11 @@
       const image = document.getElementById("group-photo");
       const areas = document.querySelectorAll("area");
 
+      // Disable click event on the image
+      image.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+
       function scaleCoordinates() {
         const originalWidth = 3080;
         const originalHeight = 2052;
@@ -773,7 +778,7 @@
         });
 
         area.addEventListener("onclick", (e) => {
-          e.stopPropagation();
+          // e.stopPropagation();
           const name = area.dataset.name;
           const imgSrc = area.dataset.img;
 
