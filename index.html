@@ -745,6 +745,15 @@
           const name = area.dataset.name;
           const imgSrc = area.dataset.img;
 
+          // Set the name in the tooltip
+          tooltipName.textContent = name;
+
+          // Show the spinner and hide the image initially
+          const spinner = document.getElementById("tooltip-spinner");
+          const tooltipImage = document.getElementById("tooltip-image");
+
+          spinner.style.display = "block";
+          tooltipImage.style.display = "none";
           // Load the image
           tooltipImage.src = imgSrc;
 
