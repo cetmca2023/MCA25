@@ -802,7 +802,18 @@
         });
 
         area.addEventListener("mousemove", (e) => {
-          tooltip.style.left = `${e.pageX + 15}px`;
+          const tooltipWidth = tooltip.offsetWidth;
+          const viewportWidth = window.innerWidth;
+
+          // Determine if the pointer is near the right edge
+          if (e.pageX + tooltipWidth + 20 > viewportWidth) {
+            // Position the tooltip to the left
+            tooltip.style.left = `${e.pageX - tooltipWidth - 15}px`;
+          } else {
+            // Position the tooltip to the right
+            tooltip.style.left = `${e.pageX + 15}px`;
+          }
+
           tooltip.style.top = `${e.pageY + 15}px`;
         });
 
